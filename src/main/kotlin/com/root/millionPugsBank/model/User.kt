@@ -9,12 +9,9 @@ data class User(
     val lastName: String,
     val loginID: String,
     val password: String,
-    @OneToMany(mappedBy = "user")
-    val accountList: MutableList<Account> = ArrayList()
-) {
-    @Id
-    @GeneratedValue
-    val userId: Long = 0
+    @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
+    val accountList: MutableSet<Account> = HashSet()
+) : BaseEntity() {
     var email: String = ""
     var address: String = ""
 }

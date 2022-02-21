@@ -7,10 +7,7 @@ import javax.persistence.*
 data class Account(
     val balance: Double = 0.0,
     @ManyToOne
-    @JoinColumn(name = "userId", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false)
     val user: User
-) {
-    @Id
-    @GeneratedValue
-    var accountId: Long = 0
+) : BaseEntity() {
 }
