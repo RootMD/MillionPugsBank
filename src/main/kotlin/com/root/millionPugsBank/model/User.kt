@@ -6,6 +6,9 @@ import javax.persistence.*
 @Entity
 @Table(name = "user")
 data class User(
+    @Id
+    @GeneratedValue
+    val id: Long = 0,
     @Column(name = "first_name")
     val firstName: String,
     @Column(name = "last_name")
@@ -13,14 +16,14 @@ data class User(
     @Column(name = "login_id")
     val loginID: String,
     @Column(name = "password")
-    val password: String
-) : BaseEntity() {
+    val password: String,
     @Column(name = "account_list")
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
     @JsonIgnoreProperties("user")
-    val accountList: MutableSet<Account> = mutableSetOf()
+    val accountList: MutableList<Account> = mutableListOf(),
     @Column(name = "email")
-    var email: String = ""
+    val email: String = "",
     @Column(name = "address")
-    var address: String = ""
-}
+    val address: String = "",
+
+)
