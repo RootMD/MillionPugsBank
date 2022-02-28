@@ -26,6 +26,8 @@ class JpaUserService(
     override fun save(entity: User): User {
         if(findAll().any { it.loginID == entity.loginID })
             throw IllegalArgumentException("User with login number ${entity.loginID} already exists")
+        if(entity.firstName.isNullOrBlank() || entity.lastName.isNullOrBlank() || entity.loginID.isNullOrBlank() || entity.password.isNullOrBlank())
+            throw IllegalArgumentException("User with required fields blank, check sent information")
         val hashedUser = when (entity.accountList) {
             null -> entity.copy(
                 password = BCrypt.hashpw(entity.password, BCrypt.gensalt()),
