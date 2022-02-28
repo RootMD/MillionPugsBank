@@ -7,7 +7,8 @@ import javax.persistence.*
 @Table(name = "account")
 data class Account(
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "account_generator")
+    @SequenceGenerator(name = "account_generator", sequenceName = "account_sequence")
     val id: Long = 0,
     @Column(name = "balance")
     var balance: Double = 0.0,

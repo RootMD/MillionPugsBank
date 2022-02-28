@@ -7,7 +7,8 @@ import javax.persistence.*
 @Table(name = "user")
 data class User(
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_generator")
+    @SequenceGenerator(name = "user_generator", sequenceName = "user_sequence")
     val id: Long = 0,
     @Column(name = "first_name")
     val firstName: String,
@@ -25,4 +26,4 @@ data class User(
     val email: String = "",
     @Column(name = "address")
     val address: String = "",
-    )
+)
