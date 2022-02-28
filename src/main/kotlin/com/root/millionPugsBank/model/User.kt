@@ -25,5 +25,4 @@ data class User(
     val email: String = "",
     @Column(name = "address")
     val address: String = "",
-
-)
+    )
