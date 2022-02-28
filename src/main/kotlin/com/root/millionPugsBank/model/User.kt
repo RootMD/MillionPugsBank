@@ -21,7 +21,7 @@ data class User(
     @Column(name = "account_list")
     @OneToMany(cascade = [CascadeType.ALL], mappedBy = "user")
     @JsonIgnoreProperties("user")
-    val accountList: MutableList<Account> = mutableListOf(),
+    val accountList: MutableList<Account> = arrayListOf(),
     @Column(name = "email")
     val email: String = "",
     @Column(name = "address")

@@ -3,7 +3,9 @@ package com.root.millionPugsBank.service.crud.datajpa
 import com.root.millionPugsBank.model.User
 import com.root.millionPugsBank.repository.UserRepository
 import com.root.millionPugsBank.service.crud.UserService
+import org.mindrot.jbcrypt.BCrypt
 import org.springframework.stereotype.Service
+import java.lang.IllegalArgumentException
 
 @Service
 class JpaUserService(
@@ -22,7 +24,16 @@ class JpaUserService(
     }
 
     override fun save(entity: User): User {
-        return userRepository.save(entity)
+        if(findAll().any { it.loginID == entity.loginID })
+            throw IllegalArgumentException("User with login number ${entity.loginID} already exists")
+        val hashedUser = when (entity.accountList) {
+            null -> entity.copy(
+                password = BCrypt.hashpw(entity.password, BCrypt.gensalt()),
+                accountList = mutableListOf()
+            )
+            else -> entity.copy(password = BCrypt.hashpw(entity.password, BCrypt.gensalt()))
+        }
+        return userRepository.save(hashedUser)
     }
 
     override fun delete(entity: User) {
@@ -44,6 +55,6 @@ class JpaUserService(
             email = entity.email,
             address = entity.address
         )
-        return save(newUser)
+        return userRepository.save(newUser)
     }
 }

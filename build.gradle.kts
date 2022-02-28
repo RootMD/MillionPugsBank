@@ -17,6 +17,7 @@ repositories {
 }
 
 dependencies {
+	implementation("org.mindrot:jbcrypt:0.4")
 	implementation("org.springframework.boot:spring-boot-starter")
 	implementation("org.springframework.boot:spring-boot-starter-web")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
