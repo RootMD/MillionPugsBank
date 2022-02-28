@@ -10,7 +10,7 @@ data class Account(
     @GeneratedValue
     val id: Long = 0,
     @Column(name = "balance")
-    val balance: Double = 0.0,
+    var balance: Double = 0.0,
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
     @JsonIgnoreProperties("accountList")
