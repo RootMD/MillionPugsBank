@@ -11,7 +11,10 @@ class AccountMapperImpl(
 ) : AccountMapper {
     override fun entityDtoToEntity(entityDto: AccountDTO): Account {
         val foundUser = userService.findById(entityDto.userID)
-        return Account(id = entityDto.id, balance = entityDto.balance, user = foundUser)
+        return when(entityDto.id) {
+            null, 0L -> Account(balance = entityDto.balance, user = foundUser)
+            else -> Account(id = entityDto.id, balance = entityDto.balance, user = foundUser)
+        }
     }
 
     override fun entityToEntityDto(entity: Account): AccountDTO {
