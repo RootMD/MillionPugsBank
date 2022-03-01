@@ -4,7 +4,6 @@ import com.root.millionPugsBank.model.Account
 import com.root.millionPugsBank.service.conversion.CurrencyConversionService
 import com.root.millionPugsBank.service.crud.AccountService
 import com.root.millionPugsBank.service.crud.dto.AccountDTO
-import org.springframework.validation.annotation.Validated
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -19,7 +18,7 @@ class AccountController(
     }
 
     @PatchMapping("/add")
-    fun addBalance(@RequestBody @Validated accountDTO: AccountDTO): Account {
+    fun addBalance(@RequestBody accountDTO: AccountDTO): Account {
         return accountService.addToAccountBalance(accountDTO.id, accountDTO.balance)
     }
 

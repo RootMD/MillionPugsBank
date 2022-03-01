@@ -5,5 +5,5 @@ import java.time.ZonedDateTime
 data class NBPExchangeRateTable(
     val tradingDate: ZonedDateTime,
     val effectiveDate: ZonedDateTime,
-    val rateTables: List<RateTable>
+    val rates: List<RateTable>
 )

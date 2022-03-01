@@ -18,22 +18,21 @@ class ExceptionController : ResponseEntityExceptionHandler() {
         return ResponseEntity(errorMessage, HttpStatus.NOT_FOUND)
     }
 
-
-    @ExceptionHandler((IllegalArgumentException::class))
+    @ExceptionHandler(IllegalArgumentException::class)
     fun handleIllegalArgument(e: IllegalArgumentException): ResponseEntity<ErrorMessage> {
-        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.NOT_FOUND, e.message)
+        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.BAD_REQUEST, e.message)
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(InvalidFormatException::class)
     fun handleInvalidFormat(e: InvalidFormatException): ResponseEntity<ErrorMessage> {
-        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.NOT_FOUND, e.message)
+        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.BAD_REQUEST, e.message)
         return ResponseEntity(errorMessage, HttpStatus.BAD_REQUEST)
     }
 
     @ExceptionHandler(RestClientException::class)
     fun handleRestClient(e: RestClientException): ResponseEntity<ErrorMessage> {
-        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.NOT_FOUND, e.message)
+        val errorMessage = ErrorMessage(ZonedDateTime.now(), HttpStatus.SERVICE_UNAVAILABLE, e.message)
         return ResponseEntity(errorMessage, HttpStatus.SERVICE_UNAVAILABLE)
     }
 }

@@ -4,8 +4,6 @@ import com.root.millionPugsBank.model.Account
 import com.root.millionPugsBank.model.User
 import com.root.millionPugsBank.service.crud.AccountService
 import com.root.millionPugsBank.service.crud.UserService
-import org.springframework.http.HttpStatus
-import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -14,11 +12,6 @@ class UserController(
     val userService: UserService,
     val accountService: AccountService
 ) {
-
-    @ExceptionHandler(NoSuchElementException::class)
-    fun handleNotFound(e: NoSuchElementException): ResponseEntity<String> =
-        ResponseEntity(e.message, HttpStatus.NOT_FOUND)
-
     @GetMapping
     fun getUsers(): Collection<User> = userService.findAll()
 

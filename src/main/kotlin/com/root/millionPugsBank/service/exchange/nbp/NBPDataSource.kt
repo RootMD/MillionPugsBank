@@ -12,13 +12,6 @@ class NBPDataSource(
     val restTemplate: RestTemplate
 ) : ExchangeRateDataSource {
     val nbpRatesUrl = "http://api.nbp.pl/api/exchangerates/"
-    override fun retrieveLastExchangeData(): NBPExchangeRateTable {
-        return restTemplate.getForObject(
-            "${nbpRatesUrl}tables/c?format=json",
-            NBPExchangeRateTable::class.java
-        )
-            ?: throw RestClientException("Call to NBP servers failed, Couldn't retrieve last exchange rates")
-    }
 
     override fun retrieveLastExchangeRateForCurrency(currency: String): Double {
         val response = restTemplate.getForObject(
